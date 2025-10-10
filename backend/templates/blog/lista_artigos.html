@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}{{ titulo }}{% endblock %}
+
+{% block content %}
+<div class="header">
+    <h1>{{ titulo }}</h1>
+    {% if categoria %}
+        <p class="categoria-info">
+            Categoria: <span style="color: {{ categoria.cor }}">●</span> {{ categoria.nome }}
+            <small>({{ artigos|length }} artigo{{ artigos|length|pluralize }})</small>
+        </p>
+    {% endif %}
+</div>
+
+<div class="artigos-lista">
+    {% for artigo in artigos %}
+    <article class="artigo-card">
+        <h2>
+            <a href="{{ artigo.get_absolute_url }}">
+                {{ artigo.titulo }}
+            </a>
+        </h2>
+        
+        <div class="artigo-meta">
+            <span>Por {{ artigo.autor.username }}</span> • 
+            <span>{{ artigo.data_publicacao|date:"d/m/Y" }}</span> • 
+            <span>📖 {{ artigo.tempo_leitura }} min</span>
+            {% if artigo.categoria %}
+                • <span style="color: {{ artigo.categoria.cor }}">● {{ artigo.categoria.nome }}</span>
+            {% endif %}
+        </div>
+        
+        <p class="artigo-resumo">{{ artigo.resumo }}</p>
+        
+        {% if artigo.destaque %}
+            <span class="destaque-badge">⭐ Destaque</span>
+        {% endif %}
+    </article>
+    {% empty %}
+    <div class="sem-artigos">
+        <p>Nenhum artigo encontrado.</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -3,24 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}CMS Moderno{% endblock %}</title>
+    <title>{% block title %}CMS Moderno 2025{% endblock %}</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
-        .header { background: #2c3e50; color: white; padding: 1rem; }
-        .nav a { color: white; margin-right: 1rem; text-decoration: none; }
-        .content { max-width: 800px; margin: 2rem auto; }
+        /* Reset e base */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        /* Header */
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-top: 5rem;
+            padding-left: 2rem;
+            border-radius: 10px;
+        }
+
+        .nav {
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            gap: 2rem;
+            position: fixed; /* Fixa o elemento na tela */
+            top: 0; /* Fixa no topo da tela */
+            left: 0; /* Fixa no início da tela (esquerda) */
+            width: 100%;
+            background: #2c3e50;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+
+        }
+
+        .nav a:hover { opacity: 0.8; }
+
+
+        /* Conteúdo principal */
+        .content {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        /* Cards de artigo */
+        .artigo-card {
+            background: white;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-left: 4px solid #3498db;
+        }
+
+        .artigo-card h2 {
+            margin-bottom: 0.5rem;
+        }
+
+        .artigo-card h2 a {
+            color: #2c3e50;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .artigo-card h2 a:hover {
+            color: #3498db;
+        }
+
+        .artigo-meta {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .artigo-resumo {
+            color: #555;
+            margin-bottom: 1rem;
+        }
+
+        .destaque-badge {
+            background: #f39c12;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Artigo completo */
+        .artigo-completo {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-top: 5rem;
+        }
+
+        .artigo-header {
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .artigo-header h1 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .destaque-banner {
+            background: #f39c12;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+
+        .artigo-conteudo {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .artigo-footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #ecf0f1;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .navegacao-artigos {
+            margin-top: 2rem;
+        }
+
+        .navegacao-artigos a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .sem-artigos {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+        }
     </style>
 </head>
 <body>
-    <header class="header">
+
         <nav class="nav">
-            <a href="/">Home</a>
-            <a href="/sobre/">Sobre</a>
-            <a href="/contato/">Contato</a>
-            <a href="/admin/">Admin</a>
+            <a href="{% url 'blog:lista_artigos' %}">🏠 Home</a>
+            <a href="{% url 'blog:sobre' %}">ℹ️ Sobre</a>
+            <a href="{% url 'blog:contato' %}">📞 Contato</a>
+            <a href="/admin/">⚙️ Admin</a>
         </nav>
-    </header>
-    
+
+
     <main class="content">
         {% block content %}
         {% endblock %}

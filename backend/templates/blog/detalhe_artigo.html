@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}{{ artigo.titulo }}{% endblock %}
+
+{% block content %}
+<article class="artigo-completo">
+    <header class="artigo-header">
+        <h1>{{ artigo.titulo }}</h1>
+        
+        <div class="artigo-meta">
+            <div class="autor-data">
+                <span>Por {{ artigo.autor.username }}</span> • 
+                <span>{{ artigo.data_publicacao|date:"d/m/Y" }}</span> • 
+                <span>📖 {{ artigo.tempo_leitura }} min de leitura</span>
+            </div>
+            
+            {% if artigo.categoria %}
+            <div class="categoria">
+                <span style="color: {{ artigo.categoria.cor }}">● {{ artigo.categoria.nome }}</span>
+            </div>
+            {% endif %}
+        </div>
+        
+        {% if artigo.destaque %}
+        <div class="destaque-banner">⭐ Artigo em Destaque</div>
+        {% endif %}
+    </header>
+
+    <div class="artigo-conteudo">
+        {{ artigo.conteudo|linebreaks }}
+    </div>
+
+    <footer class="artigo-footer">
+        <p><strong>Publicado em:</strong> {{ artigo.data_publicacao|date:"d/m/Y à\s H:i" }}</p>
+        {% if artigo.data_publicacao != artigo.data_atualizacao %}
+            <p><strong>Atualizado em:</strong> {{ artigo.data_atualizacao|date:"d/m/Y à\s H:i" }}</p>
+        {% endif %}
+    </footer>
+</article>
+
+<div class="navegacao-artigos">
+    <a href="{% url 'blog:lista_artigos' %}">← Voltar para todos os artigos</a>
+</div>
+{% endblock %}
